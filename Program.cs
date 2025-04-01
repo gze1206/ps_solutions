@@ -1,4 +1,6 @@
-﻿var solution = new Solutions.Solution();
+using System.Diagnostics;
+
+var solution = new Solutions.Solution();
 
 var stdin = Console.In;
 var stdout = Console.Out;
@@ -20,10 +22,13 @@ var newOut = new StreamWriter(outputStream);
 Console.SetIn(newIn);
 Console.SetOut(newOut);
 
+var sw = new Stopwatch();
+sw.Start();
 solution.Main();
 
 newOut.Flush();
 outputStream.Seek(0, SeekOrigin.Begin);
+sw.Stop();
 
 var outputReader = new StreamReader(outputStream);
 var result = outputReader.ReadToEnd();
@@ -37,6 +42,7 @@ Console.SetIn(stdin);
 Console.SetOut(stdout);
 
 Console.WriteLine(result == answer ? "맞혔습니다." : "틀렸습니다.");
+Console.WriteLine($"Elapsed {sw.ElapsedMilliseconds}ms");
 Console.WriteLine();
 Console.WriteLine("=== 제출한 답 ===");
 Console.WriteLine(result);
